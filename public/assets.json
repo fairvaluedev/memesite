@@ -1,0 +1,162 @@
+[
+  {
+    "id": "logo-1",
+    "name": "LayerZero Emblem",
+    "url": "https://lzmeme.pages.dev/logo/LayerZero_emblem.png",
+    "type": "logo",
+    "category": "branding",
+    "fallback": "/templates/logo-placeholder.svg"
+  },
+  {
+    "id": "logo-2",
+    "name": "LayerZero Emblem",
+    "url": "https://lzmeme.pages.dev/logo/LayerZero_emblem.svg",
+    "type": "logo",
+    "category": "branding",
+    "fallback": "/templates/logo-placeholder.svg"
+  },
+  {
+    "id": "logo-3",
+    "name": "LayerZero Logo (2)",
+    "url": "https://lzmeme.pages.dev/logo/LayerZero_logo%20(2).svg",
+    "type": "logo",
+    "category": "branding",
+    "fallback": "/templates/logo-placeholder.svg"
+  },
+  {
+    "id": "logo-4",
+    "name": "LayerZero Logo",
+    "url": "https://lzmeme.pages.dev/logo/LayerZero_logo.png",
+    "type": "logo",
+    "category": "branding",
+    "fallback": "/templates/logo-placeholder.svg"
+  },
+  {
+    "id": "logo-5",
+    "name": "Logo Full Dark",
+    "url": "https://lzmeme.pages.dev/logo/logo-full_dark.png",
+    "type": "logo",
+    "category": "branding",
+    "fallback": "/templates/logo-placeholder.svg"
+  },
+  {
+    "id": "logo-6",
+    "name": "Logo Full Dark",
+    "url": "https://lzmeme.pages.dev/logo/logo-full_dark.svg",
+    "type": "logo",
+    "category": "branding",
+    "fallback": "/templates/logo-placeholder.svg"
+  },
+  {
+    "id": "logo-7",
+    "name": "Logo Full Light",
+    "url": "https://lzmeme.pages.dev/logo/logo-full_light.png",
+    "type": "logo",
+    "category": "branding",
+    "fallback": "/templates/logo-placeholder.svg"
+  },
+  {
+    "id": "logo-8",
+    "name": "Logo Full Light",
+    "url": "https://lzmeme.pages.dev/logo/logo-full_light.svg",
+    "type": "logo",
+    "category": "branding",
+    "fallback": "/templates/logo-placeholder.svg"
+  },
+  {
+    "id": "logo-9",
+    "name": "Token",
+    "url": "https://lzmeme.pages.dev/logo/token.png",
+    "type": "logo",
+    "category": "branding",
+    "fallback": "/templates/logo-placeholder.svg"
+  },
+  {
+    "id": "logo-10",
+    "name": "Token",
+    "url": "https://lzmeme.pages.dev/logo/token.svg",
+    "type": "logo",
+    "category": "branding",
+    "fallback": "/templates/logo-placeholder.svg"
+  },
+  {
+    "id": "pfp-1",
+    "name": "Blue",
+    "url": "https://lzmeme.pages.dev/pfps/blue.jpg",
+    "type": "pfp",
+    "category": "avatars",
+    "fallback": "/templates/avatar-placeholder.svg"
+  },
+  {
+    "id": "pfp-2",
+    "name": "Bryan 1",
+    "url": "https://lzmeme.pages.dev/pfps/Bryan_1.jpg",
+    "type": "pfp",
+    "category": "avatars",
+    "fallback": "/templates/avatar-placeholder.svg"
+  },
+  {
+    "id": "pfp-3",
+    "name": "Caleb 1",
+    "url": "https://lzmeme.pages.dev/pfps/caleb_1.jpg",
+    "type": "pfp",
+    "category": "avatars",
+    "fallback": "/templates/avatar-placeholder.svg"
+  },
+  {
+    "id": "pfp-4",
+    "name": "Dima",
+    "url": "https://lzmeme.pages.dev/pfps/Dima.jpg",
+    "type": "pfp",
+    "category": "avatars",
+    "fallback": "/templates/avatar-placeholder.svg"
+  },
+  {
+    "id": "pfp-5",
+    "name": "Dom 1",
+    "url": "https://lzmeme.pages.dev/pfps/dom_1.jpg",
+    "type": "pfp",
+    "category": "avatars",
+    "fallback": "/templates/avatar-placeholder.svg"
+  },
+  {
+    "id": "pfp-6",
+    "name": "Krak",
+    "url": "https://lzmeme.pages.dev/pfps/krak.jpg",
+    "type": "pfp",
+    "category": "avatars",
+    "fallback": "/templates/avatar-placeholder.svg"
+  },
+  {
+    "id": "pfp-7",
+    "name": "Kunal",
+    "url": "https://lzmeme.pages.dev/pfps/kunal.jpg",
+    "type": "pfp",
+    "category": "avatars",
+    "fallback": "/templates/avatar-placeholder.svg"
+  },
+  {
+    "id": "pfp-8",
+    "name": "Lamps 1",
+    "url": "https://lzmeme.pages.dev/pfps/lamps_1.jpg",
+    "type": "pfp",
+    "category": "avatars",
+    "fallback": "/templates/avatar-placeholder.svg"
+  },
+  {
+    "id": "pfp-9",
+    "name": "Raz 1",
+    "url": "https://lzmeme.pages.dev/pfps/raz_1.jpg",
+    "type": "pfp",
+    "category": "avatars",
+    "fallback": "/templates/avatar-placeholder.svg"
+  },
+  {
+    "id": "pfp-10",
+    "name": "Raz 2",
+    "url": "https://lzmeme.pages.dev/pfps/raz_2.png",
+    "type": "pfp",
+    "category": "avatars",
+    "fallback": "/templates/avatar-placeholder.svg"
+  }
+]
