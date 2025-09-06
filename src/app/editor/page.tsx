@@ -507,7 +507,7 @@ export default function EditorPage() {
                     </div>
                   ) : obj.type === 'image' ? (
                     <img
-                      src={obj.getSrc()}
+                      src={(obj as fabric.Image).getSrc()}
                       alt="Layer"
                       className="w-full h-full object-cover rounded"
                       crossOrigin="anonymous"

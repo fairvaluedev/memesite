@@ -94,6 +94,15 @@ This document tracks all problems encountered during development and their solut
 
 ---
 
+## Problem #9: TypeScript Error - `obj.getSrc()` Method Not Found
+**Date**: 2025-01-06  
+**File**: `src/app/editor/page.tsx:510`  
+**Error**: `Property 'getSrc' does not exist on type 'Object'`  
+**Solution**: Cast `obj` to `fabric.Image`: `(obj as fabric.Image).getSrc()`  
+**Status**: ✅ Fixed
+
+---
+
 ## Current Warnings (Non-blocking)
 - Multiple `<img>` tag warnings (suggesting use of Next.js `<Image />` component)
 - Missing `alt` attributes on some images
