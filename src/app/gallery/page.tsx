@@ -7,7 +7,7 @@ import Link from "next/link";
 import { ThemeToggle } from "@/components/theme-toggle";
 import Fuse from "fuse.js";
 
-import { getTemplates } from "@/lib/meme-storage";
+import { getTemplates, Template } from "@/lib/meme-storage";
 
 const categories = ["all", "reaction", "relationship", "argument", "situation", "evolution", "opinion", "pointing"];
 

@@ -103,6 +103,15 @@ This document tracks all problems encountered during development and their solut
 
 ---
 
+## Problem #10: TypeScript Error - Missing Template Type Import
+**Date**: 2025-01-06  
+**File**: `src/app/gallery/page.tsx:18`  
+**Error**: `Cannot find name 'Template'`  
+**Solution**: Added `Template` import from `@/lib/meme-storage`: `import { getTemplates, Template } from "@/lib/meme-storage"`  
+**Status**: ✅ Fixed
+
+---
+
 ## Current Warnings (Non-blocking)
 - Multiple `<img>` tag warnings (suggesting use of Next.js `<Image />` component)
 - Missing `alt` attributes on some images
