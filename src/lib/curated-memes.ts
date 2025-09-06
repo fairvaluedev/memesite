@@ -1,5 +1,4 @@
-// CDN Base URL
-const CDN_BASE_URL = "https://lzmeme.pages.dev";
+// CDN Base URL - removed unused variable
 
 // Curated memes from your CDN to show on landing page initially
 // Starting empty as requested - will show user-created memes instead

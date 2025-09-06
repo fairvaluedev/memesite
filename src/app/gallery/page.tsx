@@ -15,8 +15,7 @@ export default function GalleryPage() {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
-  const [templates, setTemplates] = useState<any[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [templates, setTemplates] = useState<Template[]>([]);
 
   // Load templates on mount
   useEffect(() => {
@@ -26,8 +25,6 @@ export default function GalleryPage() {
         setTemplates(loadedTemplates);
       } catch (error) {
         console.error('Error loading templates:', error);
-      } finally {
-        setLoading(false);
       }
     };
     

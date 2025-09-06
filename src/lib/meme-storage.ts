@@ -50,7 +50,7 @@ export function getRecentMemes(): Meme[] {
     if (!stored) return [];
     
     const memes = JSON.parse(stored);
-    return memes.map((meme: any) => ({
+    return memes.map((meme: Omit<Meme, "id" | "createdAt"> & { id: string; createdAt: string }) => ({
       ...meme,
       createdAt: new Date(meme.createdAt),
     }));

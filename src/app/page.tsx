@@ -6,70 +6,69 @@ import { Play, Image, Search } from "lucide-react";
 import Link from "next/link";
 import { useState, useEffect } from "react";
 
-import { getRecentMemes } from "@/lib/meme-storage";
 import { curatedMemes } from "@/lib/curated-memes";
+
+// Slideshow images from ss folder - moved outside component to prevent recreation
+const slideshowImages = [
+  {
+    id: "slide-1",
+    url: "https://lzmeme.pages.dev/ss/Gz7SkvwWoAAeX5q.jpg",
+    creator: "LZ Community",
+    title: "Featured Meme 1"
+  },
+  {
+    id: "slide-2", 
+    url: "https://lzmeme.pages.dev/ss/GXnQb-eXwAAcbdS.jpg",
+    creator: "LZ Community",
+    title: "Featured Meme 2"
+  },
+  {
+    id: "slide-3",
+    url: "https://lzmeme.pages.dev/ss/GXnQUReW0AAfKyS.jpg", 
+    creator: "LZ Community",
+    title: "Featured Meme 3"
+  },
+  {
+    id: "slide-4",
+    url: "https://lzmeme.pages.dev/ss/GaXLwkNXUAAsg3M.jpg",
+    creator: "LZ Community", 
+    title: "Featured Meme 4"
+  },
+  {
+    id: "slide-5",
+    url: "https://lzmeme.pages.dev/ss/GvFPDOXWQAAWw59.jpg",
+    creator: "LZ Community",
+    title: "Featured Meme 5"
+  },
+  {
+    id: "slide-6",
+    url: "https://lzmeme.pages.dev/ss/GyzXELLWQAAxCSf.jpg",
+    creator: "LZ Community",
+    title: "Featured Meme 6"
+  },
+  {
+    id: "slide-7",
+    url: "https://lzmeme.pages.dev/ss/Gy0V-pmWEAI1rJx.png",
+    creator: "LZ Community",
+    title: "Featured Meme 7"
+  },
+  {
+    id: "slide-8",
+    url: "https://lzmeme.pages.dev/ss/dima.png",
+    creator: "LZ Community",
+    title: "Featured Meme 8"
+  }
+];
 
 export default function HomePage() {
   const [currentSlide, setCurrentSlide] = useState(0);
-  const [displayMemes, setDisplayMemes] = useState(curatedMemes);
-
-  // Slideshow images from ss folder
-  const slideshowImages = [
-    {
-      id: "slide-1",
-      url: "https://lzmeme.pages.dev/ss/Gz7SkvwWoAAeX5q.jpg",
-      creator: "LZ Community",
-      title: "Featured Meme 1"
-    },
-    {
-      id: "slide-2", 
-      url: "https://lzmeme.pages.dev/ss/GXnQb-eXwAAcbdS.jpg",
-      creator: "LZ Community",
-      title: "Featured Meme 2"
-    },
-    {
-      id: "slide-3",
-      url: "https://lzmeme.pages.dev/ss/GXnQUReW0AAfKyS.jpg", 
-      creator: "LZ Community",
-      title: "Featured Meme 3"
-    },
-    {
-      id: "slide-4",
-      url: "https://lzmeme.pages.dev/ss/GaXLwkNXUAAsg3M.jpg",
-      creator: "LZ Community", 
-      title: "Featured Meme 4"
-    },
-    {
-      id: "slide-5",
-      url: "https://lzmeme.pages.dev/ss/GvFPDOXWQAAWw59.jpg",
-      creator: "LZ Community",
-      title: "Featured Meme 5"
-    },
-    {
-      id: "slide-6",
-      url: "https://lzmeme.pages.dev/ss/GyzXELLWQAAxCSf.jpg",
-      creator: "LZ Community",
-      title: "Featured Meme 6"
-    },
-    {
-      id: "slide-7",
-      url: "https://lzmeme.pages.dev/ss/Gy0V-pmWEAI1rJx.png",
-      creator: "LZ Community",
-      title: "Featured Meme 7"
-    },
-    {
-      id: "slide-8",
-      url: "https://lzmeme.pages.dev/ss/dima.png",
-      creator: "LZ Community",
-      title: "Featured Meme 8"
-    }
-  ];
+  const [displayMemes, setDisplayMemes] = useState(slideshowImages);
 
   // Always show slideshow images - no user created memes
   useEffect(() => {
     console.log('Setting display memes:', slideshowImages);
     setDisplayMemes(slideshowImages);
-  }, []);
+  }, []); // Empty dependency array since slideshowImages is now constant
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -138,11 +137,11 @@ export default function HomePage() {
               Create Meme
             </Link>
             <Link href="/gallery" className="btn-secondary inline-flex items-center gap-2">
-              <Image className="w-5 h-5" />
+              <Image className="w-5 h-5" alt="" />
               Browse Templates
             </Link>
             <Link href="/lzindex" className="btn-secondary inline-flex items-center gap-2">
-              <Image className="w-5 h-5" />
+              <Image className="w-5 h-5" alt="" />
               LZIndex
             </Link>
           </motion.div>
@@ -216,7 +215,7 @@ export default function HomePage() {
                 /* Empty State */
                 <div className="relative aspect-video rounded-2xl overflow-hidden bg-muted border border-border border-dashed flex items-center justify-center">
                   <div className="text-center">
-                    <Image className="w-16 h-16 text-muted-foreground mx-auto mb-4" />
+                    <Image className="w-16 h-16 text-muted-foreground mx-auto mb-4" alt="" />
                     <h4 className="text-xl font-semibold mb-2">No Memes Yet</h4>
                     <p className="text-muted-foreground mb-4">
                       Create your first meme to see it featured here!
@@ -257,7 +256,7 @@ export default function HomePage() {
               className="text-center"
             >
               <div className="w-16 h-16 bg-muted rounded-2xl flex items-center justify-center mx-auto mb-4">
-                <Image className="w-8 h-8" />
+                <Image className="w-8 h-8" alt="" />
               </div>
               <h4 className="text-xl font-semibold mb-2">Huge Library</h4>
               <p className="text-muted-foreground">

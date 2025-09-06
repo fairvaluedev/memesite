@@ -8,13 +8,7 @@ import {
   Image, 
   Download, 
   Undo, 
-  Redo, 
-  Home, 
   Upload,
-  Palette,
-  AlignLeft,
-  AlignCenter,
-  AlignRight,
   Bold,
   Italic,
   Search,
@@ -29,7 +23,7 @@ export default function EditorPage() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const fabricCanvasRef = useRef<fabric.Canvas | null>(null);
   const [username, setUsername] = useState("");
-  const [selectedTool, setSelectedTool] = useState<string | null>(null);
+  // Removed unused selectedTool state
   const [textOptions, setTextOptions] = useState({
     fontSize: 32,
     fontFamily: "Arial",
@@ -52,7 +46,7 @@ export default function EditorPage() {
   const [filteredAssets, setFilteredAssets] = useState<CDNAsset[]>([]);
   
   // Layers state
-  const [canvasObjects, setCanvasObjects] = useState<any[]>([]);
+  const [canvasObjects, setCanvasObjects] = useState<fabric.Object[]>([]);
 
   // Load templates on component mount
   useEffect(() => {
@@ -119,22 +113,22 @@ export default function EditorPage() {
       canvas.sendToBack(rect);
 
       // Add event listener to maintain proper layering
-      canvas.on('object:added', function(e: any) {
+      canvas.on('object:added', function(e: fabric.IEvent) {
         const obj = e.target;
-        if (obj && obj.isTemplate) {
+        if (obj && (obj as any).isTemplate) {
           // Templates should always be above background but below other objects
           canvas.sendToBack(obj);
           canvas.bringForward(obj); // Move above background
-        } else if (obj && !obj.isTemplate && obj !== rect) {
+        } else if (obj && !(obj as any).isTemplate && obj !== rect) {
           // All other objects (text, images, assets) should be above templates
           canvas.bringToFront(obj);
         }
       });
 
       // Add event listener to keep templates in background when moved
-      canvas.on('object:moving', function(e: any) {
+      canvas.on('object:moving', function(e: fabric.IEvent) {
         const obj = e.target;
-        if (obj && obj.isTemplate) {
+        if (obj && (obj as any).isTemplate) {
           // When template is moved, ensure it stays in background layer
           canvas.sendToBack(obj);
           canvas.bringForward(obj); // Move above background
@@ -142,13 +136,13 @@ export default function EditorPage() {
       });
 
       // Add event listener to maintain layer order after any object modification
-      canvas.on('object:modified', function(e: any) {
+      canvas.on('object:modified', function(e: fabric.IEvent) {
         const obj = e.target;
-        if (obj && obj.isTemplate) {
+        if (obj && (obj as any).isTemplate) {
           // After template is modified (moved, scaled, etc.), keep it in background
           canvas.sendToBack(obj);
           canvas.bringForward(obj); // Move above background
-        } else if (obj && !obj.isTemplate && obj !== rect) {
+        } else if (obj && !(obj as any).isTemplate && obj !== rect) {
           // Ensure other objects stay above templates
           canvas.bringToFront(obj);
         }
@@ -207,7 +201,7 @@ export default function EditorPage() {
     if (templateUrl && fabricCanvasRef.current) {
       console.log('Loading template from URL:', templateName, templateUrl);
       
-      fabric.Image.fromURL(decodeURIComponent(templateUrl), (img: any) => {
+      fabric.Image.fromURL(decodeURIComponent(templateUrl), (img: fabric.Image) => {
         if (!fabricCanvasRef.current) return;
         
         console.log('Template loaded successfully from URL:', templateName);
@@ -256,7 +250,7 @@ export default function EditorPage() {
   };
 
   // Function to select object from layers panel
-  const selectObjectFromLayer = (object: any) => {
+  const selectObjectFromLayer = (object: fabric.Object) => {
     if (fabricCanvasRef.current) {
       fabricCanvasRef.current.setActiveObject(object);
       fabricCanvasRef.current.renderAll();
@@ -295,7 +289,7 @@ export default function EditorPage() {
       const reader = new FileReader();
       reader.onload = (event) => {
         const imgUrl = event.target?.result as string;
-        fabric.Image.fromURL(imgUrl, (img: any) => {
+        fabric.Image.fromURL(imgUrl, (img: fabric.Image) => {
           if (!fabricCanvasRef.current) return;
           
           img.scale(0.5);
@@ -323,7 +317,7 @@ export default function EditorPage() {
 
     console.log('Loading template:', template.name, 'from URL:', template.url);
 
-    fabric.Image.fromURL(template.url, (img: any) => {
+    fabric.Image.fromURL(template.url, (img: fabric.Image) => {
       if (!fabricCanvasRef.current) return;
       
       console.log('Template loaded successfully:', template.name);
@@ -368,12 +362,11 @@ export default function EditorPage() {
   const addAssetToCanvas = (asset: CDNAsset) => {
     if (!fabricCanvasRef.current) return;
 
-    fabric.Image.fromURL(asset.url, (img: any) => {
+    fabric.Image.fromURL(asset.url, (img: fabric.Image) => {
       if (!fabricCanvasRef.current) return;
       
       // Scale assets smaller than templates (logos/pfps are typically smaller)
       const canvasWidth = fabricCanvasRef.current.width || 800;
-      const canvasHeight = fabricCanvasRef.current.height || 600;
       
       let scale = 0.2; // Default smaller scale for assets
       
@@ -434,12 +427,12 @@ export default function EditorPage() {
     }
   };
 
-  const updateTextStyle = (property: string, value: any) => {
+  const updateTextStyle = (property: string, value: string | number) => {
     if (!fabricCanvasRef.current) return;
     
     const activeObject = fabricCanvasRef.current.getActiveObject();
     if (activeObject && activeObject.type === "i-text") {
-      (activeObject as any).set(property, value);
+      (activeObject as fabric.IText).set(property as keyof fabric.IText, value);
       fabricCanvasRef.current.renderAll();
     }
     
