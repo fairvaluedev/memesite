@@ -1,11 +1,15 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  output: 'export',
+  // Remove output: 'export' for Vercel deployment
+  // Vercel handles static generation automatically
   trailingSlash: true,
-  basePath: '/memesite',
   images: {
     unoptimized: true
+  },
+  // Vercel will automatically optimize images
+  experimental: {
+    optimizeCss: true,
   },
 };
 
