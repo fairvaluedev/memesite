@@ -320,7 +320,6 @@ export default function EditorPage() {
       reader.readAsDataURL(file);
     };
     input.click();
-    setSelectedTool(null);
   };
 
   const addTemplateToCanvas = (template: Template) => {
