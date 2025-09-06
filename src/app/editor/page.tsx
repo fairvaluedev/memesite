@@ -212,14 +212,16 @@ export default function EditorPage() {
         const maxWidth = canvasWidth * 0.8;
         const maxHeight = canvasHeight * 0.8;
         
-        const scaleX = maxWidth / img.width;
-        const scaleY = maxHeight / img.height;
+        const imgWidth = img.width || 1;
+        const imgHeight = img.height || 1;
+        const scaleX = maxWidth / imgWidth;
+        const scaleY = maxHeight / imgHeight;
         const scale = Math.min(scaleX, scaleY, 1);
         
         img.scale(scale);
         img.set({
-          left: (canvasWidth - img.width * scale) / 2,
-          top: (canvasHeight - img.height * scale) / 2,
+          left: (canvasWidth - imgWidth * scale) / 2,
+          top: (canvasHeight - imgHeight * scale) / 2,
           // Make template selectable but keep it as background layer
           selectable: true,
           evented: true,
@@ -328,14 +330,16 @@ export default function EditorPage() {
       const maxWidth = canvasWidth * 0.8; // Use 80% of canvas width
       const maxHeight = canvasHeight * 0.8; // Use 80% of canvas height
       
-      const scaleX = maxWidth / img.width;
-      const scaleY = maxHeight / img.height;
+      const imgWidth = img.width || 1;
+      const imgHeight = img.height || 1;
+      const scaleX = maxWidth / imgWidth;
+      const scaleY = maxHeight / imgHeight;
       const scale = Math.min(scaleX, scaleY, 1); // Don't scale up, only down
       
       img.scale(scale);
       img.set({
-        left: (canvasWidth - img.width * scale) / 2,
-        top: (canvasHeight - img.height * scale) / 2,
+        left: (canvasWidth - imgWidth * scale) / 2,
+        top: (canvasHeight - imgHeight * scale) / 2,
         // Make template selectable but keep it as background layer
         selectable: true,
         evented: true,
