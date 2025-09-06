@@ -287,7 +287,6 @@ export default function EditorPage() {
     // Always bring text to front (above templates)
     fabricCanvasRef.current.bringToFront(text);
     fabricCanvasRef.current.setActiveObject(text);
-    setSelectedTool(null);
   };
 
   const addImage = () => {
