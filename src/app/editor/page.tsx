@@ -3,6 +3,15 @@
 import { useEffect, useRef, useState } from "react";
 import { fabric } from "fabric";
 import { motion } from "framer-motion";
+
+// Extend Fabric.js types to include our custom properties
+interface CustomFabricImage extends fabric.Image {
+  isTemplate?: boolean;
+}
+
+interface CustomFabricObject extends fabric.Object {
+  isTemplate?: boolean;
+}
 import { 
   Type, 
   Image, 
@@ -115,11 +124,11 @@ export default function EditorPage() {
       // Add event listener to maintain proper layering
       canvas.on('object:added', function(e: fabric.IEvent) {
         const obj = e.target;
-        if (obj && (obj as fabric.Object & { isTemplate?: boolean }).isTemplate) {
+        if (obj && (obj as CustomFabricObject).isTemplate) {
           // Templates should always be above background but below other objects
           canvas.sendToBack(obj);
           canvas.bringForward(obj); // Move above background
-        } else if (obj && !(obj as fabric.Object & { isTemplate?: boolean }).isTemplate && obj !== rect) {
+        } else if (obj && !(obj as CustomFabricObject).isTemplate && obj !== rect) {
           // All other objects (text, images, assets) should be above templates
           canvas.bringToFront(obj);
         }
@@ -128,7 +137,7 @@ export default function EditorPage() {
       // Add event listener to keep templates in background when moved
       canvas.on('object:moving', function(e: fabric.IEvent) {
         const obj = e.target;
-        if (obj && (obj as fabric.Object & { isTemplate?: boolean }).isTemplate) {
+        if (obj && (obj as CustomFabricObject).isTemplate) {
           // When template is moved, ensure it stays in background layer
           canvas.sendToBack(obj);
           canvas.bringForward(obj); // Move above background
@@ -138,11 +147,11 @@ export default function EditorPage() {
       // Add event listener to maintain layer order after any object modification
       canvas.on('object:modified', function(e: fabric.IEvent) {
         const obj = e.target;
-        if (obj && (obj as fabric.Object & { isTemplate?: boolean }).isTemplate) {
+        if (obj && (obj as CustomFabricObject).isTemplate) {
           // After template is modified (moved, scaled, etc.), keep it in background
           canvas.sendToBack(obj);
           canvas.bringForward(obj); // Move above background
-        } else if (obj && !(obj as fabric.Object & { isTemplate?: boolean }).isTemplate && obj !== rect) {
+        } else if (obj && !(obj as CustomFabricObject).isTemplate && obj !== rect) {
           // Ensure other objects stay above templates
           canvas.bringToFront(obj);
         }
@@ -201,7 +210,7 @@ export default function EditorPage() {
     if (templateUrl && fabricCanvasRef.current) {
       console.log('Loading template from URL:', templateName, templateUrl);
       
-      fabric.Image.fromURL(decodeURIComponent(templateUrl), (img: fabric.Image) => {
+      fabric.Image.fromURL(decodeURIComponent(templateUrl), (img: CustomFabricImage) => {
         if (!fabricCanvasRef.current) return;
         
         console.log('Template loaded successfully from URL:', templateName);
@@ -228,7 +237,7 @@ export default function EditorPage() {
         });
         
         // Add a custom property to identify templates
-        (img as any).isTemplate = true;
+        img.isTemplate = true;
         
         fabricCanvasRef.current.add(img);
         // Always send templates to back (behind background but above it)
@@ -320,7 +329,7 @@ export default function EditorPage() {
 
     console.log('Loading template:', template.name, 'from URL:', template.url);
 
-    fabric.Image.fromURL(template.url, (img: fabric.Image) => {
+    fabric.Image.fromURL(template.url, (img: CustomFabricImage) => {
       if (!fabricCanvasRef.current) return;
       
       console.log('Template loaded successfully:', template.name);
@@ -347,7 +356,7 @@ export default function EditorPage() {
       });
       
       // Add a custom property to identify templates
-      (img as any).isTemplate = true;
+      img.isTemplate = true;
       
       fabricCanvasRef.current.add(img);
       // Always send templates to back (behind background but above it)
