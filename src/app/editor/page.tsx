@@ -99,10 +99,15 @@ export default function EditorPage() {
 
   useEffect(() => {
     if (canvasRef.current && !fabricCanvasRef.current) {
+      // Get responsive canvas dimensions
+      const isMobile = window.innerWidth < 768;
+      const canvasWidth = isMobile ? Math.min(300, window.innerWidth - 40) : 800;
+      const canvasHeight = isMobile ? Math.min(250, window.innerHeight - 300) : 600;
+      
       // Initialize Fabric.js canvas
       const canvas = new fabric.Canvas(canvasRef.current, {
-        width: 800,
-        height: 600,
+        width: canvasWidth,
+        height: canvasHeight,
         backgroundColor: "#ffffff",
       });
 
@@ -456,9 +461,9 @@ export default function EditorPage() {
     <div className="min-h-screen bg-background">
       {/* Header */}
       <header className="border-b border-border bg-background">
-        <div className="container mx-auto px-6 py-4 flex justify-between items-center">
-          <div className="flex items-center gap-4">
-            <Link href="/" className="text-2xl font-bold hover:text-foreground/80 transition-colors">
+        <div className="container mx-auto px-4 lg:px-6 py-4 flex justify-between items-center">
+          <div className="flex items-center gap-2 lg:gap-4">
+            <Link href="/" className="text-lg lg:text-2xl font-bold hover:text-foreground/80 transition-colors">
               LZ Meme Generator
             </Link>
             <nav className="hidden md:flex items-center gap-6">
@@ -469,16 +474,16 @@ export default function EditorPage() {
                 LZIndex
               </Link>
             </nav>
-            <span className="text-muted-foreground">Editor</span>
+            <span className="text-muted-foreground hidden sm:inline">Editor</span>
           </div>
           
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-2 lg:gap-4">
             <input
               type="text"
               placeholder="Your name (optional)"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
-              className="px-3 py-2 bg-muted border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-foreground/20"
+              className="hidden sm:block px-3 py-2 bg-muted border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-foreground/20 w-32 lg:w-auto"
             />
             <ThemeToggle />
           </div>
@@ -488,7 +493,7 @@ export default function EditorPage() {
       {/* Layers Panel */}
       {canvasObjects.length > 0 && (
         <div className="border-b border-border bg-muted/50 p-4">
-          <div className="container mx-auto">
+          <div className="container mx-auto px-4 lg:px-0">
             <h3 className="text-sm font-medium mb-3 text-muted-foreground">Layers</h3>
             <div className="flex gap-2 flex-wrap">
               {canvasObjects.map((obj, index) => (
@@ -524,12 +529,25 @@ export default function EditorPage() {
         </div>
       )}
 
-      <div className="flex">
-        {/* Sidebar Tools */}
+      <div className="flex flex-col lg:flex-row">
+        {/* Canvas Area - Top on mobile, right on desktop */}
+        <main className="flex-1 p-4 lg:p-6 order-1 lg:order-2">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            className="flex items-center justify-center min-h-[280px] lg:h-[calc(100vh-73px-3rem)]"
+          >
+            <div className="border border-border rounded-lg overflow-hidden shadow-lg max-w-full max-h-full">
+              <canvas ref={canvasRef} />
+            </div>
+          </motion.div>
+        </main>
+
+        {/* Sidebar Tools - Bottom on mobile, left on desktop */}
         <motion.aside
           initial={{ x: -100, opacity: 0 }}
           animate={{ x: 0, opacity: 1 }}
-          className="w-80 border-r border-border bg-background p-6 h-[calc(100vh-73px)] overflow-y-auto"
+          className="w-full lg:w-80 border-r border-border bg-background p-4 lg:p-6 h-auto lg:h-[calc(100vh-73px)] overflow-y-auto order-2 lg:order-1"
         >
           <h3 className="text-lg font-semibold mb-6">Tools</h3>
           
@@ -591,7 +609,7 @@ export default function EditorPage() {
               </div>
 
               {/* Templates Grid (4x2) */}
-              <div className="grid grid-cols-4 gap-2 max-h-48 overflow-y-auto">
+              <div className="grid grid-cols-3 sm:grid-cols-4 gap-2 max-h-48 overflow-y-auto">
                 {filteredTemplates.map((template) => (
                   <motion.button
                     key={template.id}
@@ -651,7 +669,7 @@ export default function EditorPage() {
                     <h5 className="text-sm font-medium mb-2" style={{ color: 'rgb(var(--color-muted-foreground))' }}>
                       Logos
                     </h5>
-                    <div className="grid grid-cols-3 gap-2">
+                    <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
                       {filteredAssets.filter(asset => asset.type === "logo").map((asset) => (
                         <motion.button
                           key={asset.id}
@@ -681,7 +699,7 @@ export default function EditorPage() {
                     <h5 className="text-sm font-medium mb-2" style={{ color: 'rgb(var(--color-muted-foreground))' }}>
                       Profile Pictures
                     </h5>
-                    <div className="grid grid-cols-3 gap-2">
+                    <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
                       {filteredAssets.filter(asset => asset.type === "pfp").map((asset) => (
                         <motion.button
                           key={asset.id}
@@ -718,7 +736,7 @@ export default function EditorPage() {
           <div className="space-y-4 mb-8">
             <h4 className="font-medium">Text Style</h4>
             
-            <div className="grid grid-cols-2 gap-2">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
               <div>
                 <label className="text-sm text-muted-foreground">Size</label>
                 <input
@@ -785,19 +803,6 @@ export default function EditorPage() {
             </button>
           </div>
         </motion.aside>
-
-        {/* Canvas Area */}
-        <main className="flex-1 p-6">
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            className="flex items-center justify-center h-[calc(100vh-73px-3rem)]"
-          >
-            <div className="border border-border rounded-lg overflow-hidden shadow-lg">
-              <canvas ref={canvasRef} />
-            </div>
-          </motion.div>
-        </main>
       </div>
     </div>
   );
