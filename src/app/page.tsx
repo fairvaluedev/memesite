@@ -137,11 +137,11 @@ export default function HomePage() {
               Create Meme
             </Link>
             <Link href="/gallery" className="btn-secondary inline-flex items-center gap-2">
-              <Image className="w-5 h-5" alt="" />
+              <Image className="w-5 h-5" />
               Browse Templates
             </Link>
             <Link href="/lzindex" className="btn-secondary inline-flex items-center gap-2">
-              <Image className="w-5 h-5" alt="" />
+              <Image className="w-5 h-5" />
               LZIndex
             </Link>
           </motion.div>
@@ -215,7 +215,7 @@ export default function HomePage() {
                 /* Empty State */
                 <div className="relative aspect-video rounded-2xl overflow-hidden bg-muted border border-border border-dashed flex items-center justify-center">
                   <div className="text-center">
-                    <Image className="w-16 h-16 text-muted-foreground mx-auto mb-4" alt="" />
+                    <Image className="w-16 h-16 text-muted-foreground mx-auto mb-4" />
                     <h4 className="text-xl font-semibold mb-2">No Memes Yet</h4>
                     <p className="text-muted-foreground mb-4">
                       Create your first meme to see it featured here!
@@ -256,7 +256,7 @@ export default function HomePage() {
               className="text-center"
             >
               <div className="w-16 h-16 bg-muted rounded-2xl flex items-center justify-center mx-auto mb-4">
-                <Image className="w-8 h-8" alt="" />
+                <Image className="w-8 h-8" />
               </div>
               <h4 className="text-xl font-semibold mb-2">Huge Library</h4>
               <p className="text-muted-foreground">

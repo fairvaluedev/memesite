@@ -112,6 +112,15 @@ This document tracks all problems encountered during development and their solut
 
 ---
 
+## Problem #11: TypeScript Error - Lucide Image Component Alt Props
+**Date**: 2025-01-06  
+**File**: `src/app/page.tsx` (multiple locations)  
+**Error**: `Property 'alt' does not exist on type 'IntrinsicAttributes & Omit<LucideProps, "ref"> & RefAttributes<SVGSVGElement>'`  
+**Solution**: Removed `alt=""` props from Lucide React `Image` components as they don't accept alt attributes  
+**Status**: ✅ Fixed
+
+---
+
 ## Current Warnings (Non-blocking)
 - Multiple `<img>` tag warnings (suggesting use of Next.js `<Image />` component)
 - Missing `alt` attributes on some images
