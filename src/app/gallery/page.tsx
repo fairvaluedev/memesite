@@ -53,7 +53,7 @@ export default function GalleryPage() {
     }
 
     return templateList;
-  }, [searchTerm, selectedCategory, fuse]);
+  }, [searchTerm, selectedCategory, templates, fuse]);
 
   return (
     <div className="min-h-screen bg-background">

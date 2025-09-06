@@ -115,11 +115,11 @@ export default function EditorPage() {
       // Add event listener to maintain proper layering
       canvas.on('object:added', function(e: fabric.IEvent) {
         const obj = e.target;
-        if (obj && (obj as any).isTemplate) {
+        if (obj && (obj as fabric.Object & { isTemplate?: boolean }).isTemplate) {
           // Templates should always be above background but below other objects
           canvas.sendToBack(obj);
           canvas.bringForward(obj); // Move above background
-        } else if (obj && !(obj as any).isTemplate && obj !== rect) {
+        } else if (obj && !(obj as fabric.Object & { isTemplate?: boolean }).isTemplate && obj !== rect) {
           // All other objects (text, images, assets) should be above templates
           canvas.bringToFront(obj);
         }
@@ -128,7 +128,7 @@ export default function EditorPage() {
       // Add event listener to keep templates in background when moved
       canvas.on('object:moving', function(e: fabric.IEvent) {
         const obj = e.target;
-        if (obj && (obj as any).isTemplate) {
+        if (obj && (obj as fabric.Object & { isTemplate?: boolean }).isTemplate) {
           // When template is moved, ensure it stays in background layer
           canvas.sendToBack(obj);
           canvas.bringForward(obj); // Move above background
@@ -138,11 +138,11 @@ export default function EditorPage() {
       // Add event listener to maintain layer order after any object modification
       canvas.on('object:modified', function(e: fabric.IEvent) {
         const obj = e.target;
-        if (obj && (obj as any).isTemplate) {
+        if (obj && (obj as fabric.Object & { isTemplate?: boolean }).isTemplate) {
           // After template is modified (moved, scaled, etc.), keep it in background
           canvas.sendToBack(obj);
           canvas.bringForward(obj); // Move above background
-        } else if (obj && !(obj as any).isTemplate && obj !== rect) {
+        } else if (obj && !(obj as fabric.Object & { isTemplate?: boolean }).isTemplate && obj !== rect) {
           // Ensure other objects stay above templates
           canvas.bringToFront(obj);
         }

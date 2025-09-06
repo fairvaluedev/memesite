@@ -6,7 +6,7 @@ import { Play, Image, Search } from "lucide-react";
 import Link from "next/link";
 import { useState, useEffect } from "react";
 
-import { curatedMemes } from "@/lib/curated-memes";
+// Removed unused import: curatedMemes
 
 // Slideshow images from ss folder - moved outside component to prevent recreation
 const slideshowImages = [
