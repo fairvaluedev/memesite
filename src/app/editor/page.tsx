@@ -174,7 +174,7 @@ export default function EditorPage() {
           // Check if we're editing text
           const isEditingText = activeObject && 
             (activeObject.type === 'i-text' || activeObject.type === 'text') && 
-            activeObject.isEditing;
+            (activeObject as fabric.IText).isEditing;
           
           // Only delete if we're not editing text
           if (activeObject && !isEditingText) {
