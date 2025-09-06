@@ -392,7 +392,7 @@ export default function EditorPage() {
       
       img.scale(scale);
       img.set({
-        left: canvasWidth - (img.width * scale) - 20, // Position in top-right corner
+        left: canvasWidth - ((img.width || 1) * scale) - 20, // Position in top-right corner
         top: 20,
       });
       
