@@ -225,9 +225,10 @@ export default function EditorPage() {
           // Make template selectable but keep it as background layer
           selectable: true,
           evented: true,
-          // Add a custom property to identify templates
-          isTemplate: true
         });
+        
+        // Add a custom property to identify templates
+        (img as any).isTemplate = true;
         
         fabricCanvasRef.current.add(img);
         // Always send templates to back (behind background but above it)
@@ -343,9 +344,10 @@ export default function EditorPage() {
         // Make template selectable but keep it as background layer
         selectable: true,
         evented: true,
-        // Add a custom property to identify templates
-        isTemplate: true
       });
+      
+      // Add a custom property to identify templates
+      (img as any).isTemplate = true;
       
       fabricCanvasRef.current.add(img);
       // Always send templates to back (behind background but above it)
